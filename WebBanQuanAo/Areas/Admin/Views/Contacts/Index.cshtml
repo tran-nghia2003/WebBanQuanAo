@@ -1,0 +1,170 @@
+﻿@model PagedList.IPagedList<Models.EF.Feedback>
+@using PagedList;
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="~/Admin/HomeAdmin/Index" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="~/Admin/Orders/Index" class="nav-link">Danh sách liên hệ</a>
+        </li>
+    </ul>
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Danh sách liên hệ</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Liên hệ</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh sách liên hệ</h3>
+            <div class="card-tools">
+                @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-warning" })
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Mã liên hệ</th>
+                        <th>Tên khách hàng</th>
+                        <th>Số điện thoại</th>
+                        <th>Địa chỉ</th>
+                        <th>Email</th>
+                        <th>Ngày tạo</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ID</td>
+                            <td>@item.Name</td>
+                            <td>@item.Phone</td>
+                            <td>@item.Address</td>
+                            <td>@item.Email</td>
+                            <td>@item.CreateDate.Value.ToString("dd/MM/yyyy")</td>
+                            @if (item.Status == false)
+                            {
+                                <td>Chưa duyệt</td>
+                            }
+                            else
+                            {
+                                <td>Đã duyệt</td>
+                            }
+
+
+
+                            <td>
+                                @using (Html.BeginForm("Approval", "Contacts", new { id = item.ID }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input style="padding: 5px; padding-left:15px; padding-right: 15px; background-color: darkblue; color: white" type="submit" name="submit" value="Duyệt" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <div class="pagination-container">
+                <ul class="pagination">
+                    @if (Model.Count < 0)
+                    {
+                        <li><h2>không có bản ghi nào!!!</h2></li>
+                    }
+                    else
+                    {
+                        if (Model.HasPreviousPage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", new { page = 1 })">Trang đầu</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })">Trang trước</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item disabled">
+                                <span class="page-link">Trang đầu</span>
+                            </li>
+                            <li class="page-item disabled">
+                                <span class="page-link">Trang trước</span>
+                            </li>
+                        }
+
+                        for (int i = 1; i <= Model.PageCount; i++)
+                        {
+                            if (i == Model.PageNumber || i == Model.PageNumber - 1 || i == Model.PageNumber + 1 || i == 1 || i == Model.PageCount)
+                            {
+                                <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                                    <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                                </li>
+                            }
+                            else if (i == 2 || i == Model.PageCount - 1)
+                            {
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                            }
+                        }
+
+                        if (Model.HasNextPage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1 })">Trang sau</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", new { page = Model.PageCount })">Trang cuối</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item disabled">
+                                <span class="page-link">Trang sau</span>
+                            </li>
+                            <li class="page-item disabled">
+                                <span class="page-link">Trang cuối</span>
+                            </li>
+                        }
+                    }
+
+                </ul>
+            </div>
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>

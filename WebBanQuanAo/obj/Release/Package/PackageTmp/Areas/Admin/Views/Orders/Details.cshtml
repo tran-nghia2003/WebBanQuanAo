@@ -1,0 +1,150 @@
+﻿@model Models.EF.Order
+
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var orderDtail = (List<Models.EF.OrderDetail>)ViewBag.orderDetail;
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="~/Admin/HomeAdmin/Index" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="~/Admin/orders/Index" class="nav-link">Đơn hàng</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="~/Admin/orders/details" class="nav-link">Chi tiết đơn hàng</a>
+        </li>
+    </ul>
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Chi tiết đơn hàng</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Đơn hàng</a></li>
+                    <li class="breadcrumb-item active">Chi tiết đơn hàng</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Chi tiết đơn hàng</h3>
+            <div class="card-tools">
+                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-warning" })
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Mã đơn hàng</label>
+                        <p class="form-group">@Model.ID</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Họ tên khách hàng</label>
+                        <p class="form-group">@Model.ShipName</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tổng tiền</label>
+                        <p class="form-group">@string.Format("{0:N0} VNĐ", Model.TotalPrice)</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <p class="form-group">@Model.ShipMobile</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Ngày tạo</label>
+                        <p class="form-group">@Model.CreatedDate.Value.ToString("dd/MM/yyyy")</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <p class="form-group">@Model.ShipEmail</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Trạng thái</label>
+                        <p class="form-group">@(Model.Status==1?"Chưa thanh toán":"Đã thanh toán")</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <p class="form-group">@Model.ShipAddress</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Danh sách sản phẩm</h2>
+                </div>
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in orderDtail)
+                            {
+                                <tr>
+                                    <td>@item.NameProduct
+                                    <td>@item.Price</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@string.Format("{0:N0} VNĐ", (item.Price * item.Quantity))</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <p>
+                <a href="@Url.Action("Edit", new { id = Model.ID })" class="btn btn-success">Cập nhật</a> |
+                @Html.ActionLink("Trở về danh sách", "Index", null, new { @class = "btn btn-primary" })
+            </p>
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+

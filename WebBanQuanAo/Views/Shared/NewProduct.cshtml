@@ -1,0 +1,35 @@
+﻿@model List<Models.EF.Product>
+
+<style>
+    .card-btn:hover {
+        color: aliceblue !important;
+    }
+</style>
+
+@foreach (var item in Model)
+{
+    var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+    <div class="product-card">
+        <div class="product-image">
+            <span class="discount-tag"></span>
+            <a href="@url"><img src="~/image/@item.Image" class="product-thumb" alt="@item.Name"></a>
+
+            <a href="/them-gio-hang?productId=@item.ID&quantity=1" style="color:#000000; text-decoration: none" class="card-btn">Thêm vào giỏ hàng</a>
+        </div>
+        <div class="product-info">
+            <h4 class="product-brand">@item.Name</h4>
+            <br />
+            @if (item.PromotionPrice == null)
+            {
+                <span class="price">@string.Format("{0:N0} VNĐ", item.Pice)</span>
+            }
+            else
+            {
+                <span class="price">@string.Format("{0:N0} VNĐ", item.PromotionPrice)</span><span class="actual-price">@string.Format("{0:N0} VNĐ", item.Pice)</span>
+            }
+
+        </div>
+    </div>
+}
+
+

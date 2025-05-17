@@ -1,0 +1,19 @@
+﻿@model List<Models.EF.ProductCategory>
+
+
+@foreach (var item in Model.Where(x => x.ParentID == null))
+{
+    var child = Model.Where(x => x.ParentID == item.ID);
+    <button class="accordion">@item.Name</button>
+
+    if (@child.Count() > 0)
+    {
+        <div class="panel">
+            @foreach (var ChildItem in child)
+            {
+                <p><a href="/san-pham/@ChildItem.MetaTitle-@ChildItem.ID" style="text-decoration:none; color:black;">@ChildItem.Name</a></p>
+            }
+        </div>
+    }
+    <p><a href="/san-pham/@item.MetaTitle-@item.ID" class="Child_Category" style="text-decoration:none; color:black;">Xem tất cả</a></p>
+}

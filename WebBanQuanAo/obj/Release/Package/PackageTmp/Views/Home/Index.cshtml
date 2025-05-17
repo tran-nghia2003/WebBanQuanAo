@@ -1,0 +1,84 @@
+﻿ @{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    ViewBag.active = 1;
+}
+
+<title>Trang chủ</title>
+
+<link href="~/css/Home.css" rel="stylesheet" />
+
+
+<div class="slideshow-container">
+    @{Html.RenderAction("Slide", "Home");}
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+
+</div>
+<br>
+
+<div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+    <span class="dot" onclick="currentSlide(6)"></span>
+    <span class="dot" onclick="currentSlide(7)"></span>
+    <span class="dot" onclick="currentSlide(8)"></span>
+</div>
+<div class="container">
+    <div class="tieude"><h1>Sản phẩm mới</h1></div>
+    <div class="product-container">
+        @{Html.RenderAction("NewProduct", "Home");}
+    </div>
+</div>
+
+<div class="container">
+    <div class="tieude"><h1>Sản phẩm hot</h1></div>
+    <div class="product-container">
+        @{Html.RenderAction("HotProduct", "Home");}
+    </div>
+</div>
+
+<div class="tieude"><h1>Đặc biệt</h1></div>
+<div class"container">
+    <div class="product-containe2">
+        <div class="product-card2">
+
+            <a href="#"><img src="~/image/slideshow_7.jpg" class="product-thumb" alt=""></a>
+
+        </div>
+        <div class="product-card2">
+
+            <a href="#"><img src="~/image/slideshow_3.jpg" class="product-thumb" alt=""></a>
+
+        </div>
+        <div class="product-card2">
+
+            <a href="#"><img src="~/image/slideshow_4.jpg" class="product-thumb" alt=""></a>
+
+        </div>
+        <div class="product-card2">
+
+            <a href="#"><img src="~/image/slideshow_5.jpg" class="product-thumb" alt=""></a>
+        </div>
+        <div class="product-card2">
+
+            <a href="#"><img src="~/image/slideshow_6.jpg" class="product-thumb" alt=""></a>
+        </div>
+        <div class="product-card2">
+
+            <a href="#"><img src="~/image/slideshow_9.jpg" class="product-thumb" alt=""></a>
+        </div>
+    </div>
+</div>
+<div class="tieude"><h1>Thông Báo</h1></div>
+<div class"container">
+    <div class="product-containe2">
+
+
+        <a href="#"><img src="~/image/suthongbao.jpg" class="product-thumb" alt="" style="width: 1500px; height: 1000px"></a>
+
+    </div>
+</div>
+

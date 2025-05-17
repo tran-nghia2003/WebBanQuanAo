@@ -1,0 +1,288 @@
+.product1{
+	padding: 0px 4vw;
+	margin-top:20px !important;
+}
+.product3{
+	position: relative;
+	width: 67%;
+	float: left;
+}
+
+.product4{
+	width: 33%;
+	float: right;
+}
+.product-hinhanh {
+	display: none;
+	max-width: 100%;
+	max-height: 100%;
+}
+.mau input{
+	cursor: pointer;
+}
+#xamdam{
+	background-color: #373737;
+	width: 35px;
+	height: 35px;
+	border: solid #131313;
+}
+#do{
+	background-color: #FC0808;
+	width: 35px;
+	height: 35px;
+	border: solid #131313;
+}
+#xam{
+	background-color: #959595;
+	width: 35px;
+	height: 35px;
+	border: solid #131313;
+}
+#xanhdam{
+	background-color: #08388C;
+	width: 35px;
+	height: 35px;
+	border: solid #131313;
+}
+#xanh{
+	background-color: #55A5E7;
+	width: 35px;
+	height: 35px;
+	border: solid #131313;
+}
+#caption{
+	padding-top: 40px;
+	padding-bottom: 10px;
+}
+.thanhmau{
+	margin-top: 10px;
+	display: flex;
+
+	justify-content: center;
+}
+.mau-product{
+	margin-left: 10px;
+}
+.hinhanhtrai{
+	display:block;
+	width: 50%;
+	height: 100%;
+	float: left;
+	padding: 0px 10px;
+}
+.hinhanhtrai .slide_product{
+
+}
+.hinhanhphai {
+	width: 50%;
+	height: 704px;
+	float: left;
+	padding: 0px 10px;
+}
+.product3 img{
+	overflow: auto;
+
+	width: 600px;
+	height: 700px;
+}
+.product4_1{
+
+	text-align: center;
+}
+.product4_1_2{
+	margin-top: 20px;
+}
+.product4_1_3{
+	padding-top: 40px;
+	display: flex;
+	justify-content: center;
+	
+}
+.product4_1_3 > div{
+	cursor: pointer;
+	margin: 0px 10px;
+}
+.product4_1_3 > div:hover{
+	text-decoration: underline;
+	
+}
+.product4_1_4{
+	margin-bottom: 20px;
+	padding-top: 50px;
+}
+#add-sanpham{
+	color: #FCFCFC;
+	text-align: center;
+	font-size: 16px;
+	width: 55%;
+	height: 35px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D30003;
+}
+.product4_1_6{
+
+ 	padding-left: 130px;
+	padding-right: 50px;
+	padding-top: 20px;
+	height: 250px;
+
+}
+.chitiet-product{
+	overflow: auto;
+	height: 300px;
+}
+.accordion {
+	margin-top: 5px; 
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+	font-size: 14px;
+	text-align: left;
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+.panel p{
+	padding-top: 15px;
+	padding-bottom: 12px;
+}
+.product5{
+	padding-top: 30px;
+	text-align: center;
+	clear: both;
+}
+
+
+/*-----------------------------*/
+
+.product-container{
+	margin-top: 50px;
+    padding: 0 5vw;
+    scroll-behavior: smooth;
+	display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    height: auto;
+    grid-row-gap: 40px;
+}
+
+.product-container::-webkit-scrollbar{
+    display: none;
+}
+
+.product-card{
+    flex: 0 0 auto;
+    width: 250px;
+    height: 450px;
+    margin-right: 40px;
+}
+
+.product-image{
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+}
+
+.product-thumb{
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+
+.card-btn{
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    width: 90%;
+    text-transform: capitalize;
+    border: none;
+    outline: none;
+    background: #fff;
+    border-radius: 5px;
+    transition: 0.5s;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.product-card:hover .card-btn{
+    opacity: 1;
+}
+
+.card-btn:hover{
+	color: aliceblue;
+    background: #232323;
+}
+
+.product-info{
+    width: 100%;
+    height: 100px;
+    padding-top: 10px;
+}
+.product-info p{
+	margin-bottom: 10px;
+}
+
+
+.product-brand{
+    text-transform: uppercase;
+}
+
+.product-short-des{
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    opacity: 0.5;
+    text-transform: capitalize;
+    margin: 5px 0;
+}
+
+.price{
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.actual-price{
+    margin-left: 20px;
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
+.container{
+	margin-top: 50px;
+    padding: 0 10vw;
+
+}
+/*----------------------------*/

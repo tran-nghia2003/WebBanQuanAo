@@ -1,0 +1,14 @@
+﻿@model List<Models.EF.Menu>
+
+
+<nav class="menu">
+    <ul>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <li class="dropdow"><a href="@item.Link" target="@item.Target">@item.Text</a></li>
+            }
+        }
+    </ul>
+</nav>

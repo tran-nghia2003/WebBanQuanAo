@@ -1,0 +1,80 @@
+﻿@model WebBanQuanAo.Models.Register
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<link href="~/css/Register.css" rel="stylesheet" />
+
+<style>
+    .text-danger {
+        color: red;
+    }
+
+    .alert-success {
+        color: #32c239;
+    }
+</style>
+
+<div class="sigup">
+    <div class="sigup-title"></div>
+    <div class="sigup1">
+        <div class="sigup2">
+            <h2>Gửi OTP</h2>
+            @using (Html.BeginForm("SendOTP", "User", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>Vui lòng nhập email để nhận mã OTP</h4>
+                    <hr />
+                    <div class="form-group" style="padding:20px 0">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        @if (ViewBag.Success != null)
+                        {
+                            <div class="alert alert-success">@ViewBag.Success</div>
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBox("email", null, new { @class = "form-control" })
+                            @Html.ValidationMessage("email", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Gửi OTP" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .btn-default {
+        background-color: #3498db; /* Màu nền */
+        color: white; /* Màu chữ */
+        padding: 10px 20px; /* Kích thước nút */
+        border-radius: 5px; /* Đường cong viền */
+        border: none; /* Bỏ viền */
+        text-align: center; /* Căn giữa chữ */
+        text-decoration: none; /* Bỏ gạch chân */
+        display: inline-block;
+        font-size: 16px;
+        transition-duration: 0.4s; /* Hiệu ứng khi hover */
+        cursor: pointer; /* Con trỏ khi di chuột */
+    }
+
+        .btn-default:hover {
+            background-color: #2980b9; /* Màu nền khi hover */
+            color: white; /* Màu chữ khi hover */
+        }
+</style>
+
+
+

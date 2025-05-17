@@ -1,0 +1,103 @@
+﻿@model List<WebBanQuanAo.Models.CartItem>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+
+
+}
+<title>Trang giỏ hàng</title>
+<link href="~/css/ShoppingCart.css" rel="stylesheet" />
+
+<style>
+</style>
+
+<div class="container-cart">
+    <h1>Giỏ hàng</h1>
+    <div class="cart">
+
+        <div class="products">
+            @if (Model.Count > 0)
+            {
+
+                foreach (var item in Model)
+                {
+
+                    <div class="product">
+                        <img src="~/image/@item.Product.Image">
+                        <div class="product-info">
+                            <h3 class="product-id">Mã SP: @item.Product.Code</h3>
+                            <h3 class="product-name">Tên SP: @item.Product.Name</h3>
+
+
+                            <h4 class="product-price">
+                                Giá: @string.Format("{0:N0} VNĐ", item.Product.PromotionPrice ?? item.Product.Pice)
+                            </h4>
+
+                            <form action="@Url.Action("UpdateItem", "Cart")" method="post">
+                                @Html.Hidden("productId", item.Product.ID)
+                                <p class="product-quantity">
+                                    Số lượng: <input type="number" name="quantity" value="@item.Quantity" style="width:100px" />
+                                    <input type="submit" value="Cập nhật" style="background-color: #0094ff; color:aliceblue; width:100px ; height:30px; border-radius:5px;" />
+                                </p>
+                            </form>
+
+                            <h4 class="product-total-price">
+                                Thành tiền: @string.Format("{0:N0} VNĐ", (item.Product.PromotionPrice ?? item.Product.Pice) * item.Quantity)
+                            </h4>
+                            <form action="@Url.Action("RemoveItem","Cart")" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" method="post">
+                                @Html.Hidden("productId", item.Product.ID)
+                                <p class="product-remove">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <input type="submit" value="Xóa" style="background-color: #d9534f; color:aliceblue; width:100px ; height:30px; border-radius:5px;" />
+                                </p>
+                            </form>
+
+
+                        </div>
+                    </div>
+
+                }
+            }
+            else
+            {
+                <span class="alert alert-danger">Bạn chưa có sản phẩm nào. Vui lòng quay lại trang <a href="/">sản phẩm</a> để mua hàng. </span>
+            }
+
+        </div>
+        <div class="cart-total">
+            <p>
+                <span>Tổng tiền</span>
+                <span>@(string.Format("{0:N0} VNĐ", Model.Sum(x=>x.TotalPrice)))</span>
+            </p>
+            <p>
+                <span>Số mặt hàng</span>
+                <span>@Model.Sum(m => m.Quantity) </span>
+            </p>
+            <a class="btn btn-primary" href="@Url.Action("Index", "Home")">Tiếp tục mua hàng</a>
+            @if (Model.Count > 0)
+            {
+                <a href="@Url.Action("Payment", "Cart")" class="btn btn-success">Thanh toán</a>
+            }
+
+        </div>
+    </div>
+</div>
+<div class="cart2">
+    <div>
+        <img src="~/image/cart1.jpg">
+        <p><b>MIỄN PHÍ VẬN CHUYỂN</b></p>
+        <p>Cho đơn hàng nguyên giá từ 500k</p>
+    </div>
+    <div>
+        <img src="~/image/cart2.jpg">
+        <p><b>90 NGÀY ĐỔI TRẢ</b></p>
+        <p>Đổi trả sản phẩm trong 90 ngày</p>
+    </div>
+    <div>
+        <img src="~/image/cart3.jpg">
+        <p><b>HOTLINE 24/7</b></p>
+        <p>Hotline 1900 54 54 57</p>
+    </div>
+</div>
+

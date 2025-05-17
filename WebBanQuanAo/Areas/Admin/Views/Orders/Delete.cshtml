@@ -1,0 +1,147 @@
+﻿@model Models.EF.Order
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="~/Admin/HomeAdmin/Index" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="~/Admin/orders/Index" class="nav-link">Đơn hàng</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="~/Admin/orders/delete" class="nav-link">Xóa đơn hàng</a>
+        </li>
+    </ul>
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thông tin đơn hàng</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Đơn hàng</a></li>
+                    <li class="breadcrumb-item active">Xóa đơn hàng</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Thông tin đơn hàng</h3>
+        </div>
+        <div class="card-body">
+            <h3>Bạn có chắc chắn muốn xóa đơn hàng này không?</h3>
+            <div>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedDate)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CustomerID)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CustomerID)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ShipName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ShipName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ShipMobile)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ShipMobile)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ShipAddress)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ShipAddress)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ShipEmail)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ShipEmail)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Status)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TotalPrice)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TotalPrice)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TypePayment)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TypePayment)
+                    </dd>
+
+                </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color" style="margin-left:30px">
+                        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            @Html.ActionLink("Trở về danh sách", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+
+

@@ -1,0 +1,118 @@
+﻿@model Models.EF.Contact
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<!DOCTYPE html>
+
+<title>Trang liên hệ</title>
+<link href="~/css/contact.css" rel="stylesheet" />
+
+
+<style>
+    #mapCanvas {
+        height: 600px;
+    }
+
+    .form-horizontal {
+        width: 40%;
+        margin-right: 20px;
+    }
+</style>
+@section jsFooter{
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+
+
+    <script src="~/js/contactController.js"></script>
+
+    <script>
+        
+
+        // This example displays a marker at the center of Australia.
+        // When the user clicks the marker, an info window opens.
+        //21.046300, 105.793266
+        function initMap() {
+            var uluru = { lat: 10.980538763409717, lng: 106.67547777236429};
+            var map = new google.maps.Map(document.getElementById('mapCanvas'), {
+                zoom: 18,
+                center: uluru
+            });
+
+            var contentString = '@Html.Raw(Model.Context)';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+                title: 'Địa chỉ'
+            });
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+
+
+}
+
+
+<div class="contact1">
+    <div class="contact2">
+        <div class="contact2_1" style="text-align: left">
+            <h2>Thông tin liên hệ</h2>
+            @Html.Raw(Model.Context)
+            <br />
+            <h2>Gửi thông tin</h2>
+        </div>
+        <div class="contact2_2" style="display:flex">
+            <form style="width: 40%; margin-right: 20px;">
+                <div class="error-message" id="errorFullname" style="color: red">
+      
+                </div>
+                <label for="fname">Họ tên</label>
+                <input type="text" id="txtName" placeholder="Họ tên...">
+
+                <div class="error-message" id="errorPhone" style="color: red">
+
+                </div>
+                <label for="lname">Điện thoại</label>
+                <input type="text" id="txtMobile" placeholder="Số điện thoại...">
+
+                <div class="error-message" id="errorAddress" style="color: red">
+
+                </div>
+                <label for="lname">Địa chỉ</label>
+                <input type="text" id="txtAddress" placeholder="Địa chỉ...">
+
+                <div class="error-message" id="errorMail" style="color: red">
+
+                </div>
+                <label for="lname">Email</label>
+                <input type="text" id="txtEmail" placeholder="Email...">
+
+                <div class="error-message" id="errorMessage" style="color: red">
+
+                </div>
+                <label for="subject">Yêu cầu</label>
+                <textarea id="txtContent" placeholder="Viết vài thứ.." style="height:200px"></textarea>
+
+                <input type="submit" id="btnSend" value="Gửi">
+            </form>
+
+
+
+            <div class="contact2_2" style="width:60%">
+                <h2>Bản đồ</h2>
+                <div class="map" id="mapCanvas"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+    

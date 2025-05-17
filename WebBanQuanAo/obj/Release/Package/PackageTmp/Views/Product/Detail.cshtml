@@ -1,0 +1,263 @@
+﻿@model Models.EF.Product
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var category = (Models.EF.ProductCategory)ViewBag.Category;
+    var relatedProducts = (List<Models.EF.Product>)ViewBag.RelatedProducts;
+    var productImages = (Models.EF.ProductImage)ViewBag.ProductImages;
+}
+
+
+
+<title>Trang chi tiết sản phẩm</title>
+
+<link href="~/css/product.css" rel="stylesheet" />
+
+
+
+<style>
+    .product-brand {
+        text-transform: none !important;
+    }
+
+    #caption {
+        padding-top: 20px;
+        padding-bottom: 10px;
+    }
+    .product4_1_4 {
+        margin-bottom: 20px;
+        padding-top: 10px;
+    }
+    
+    .product4_1_3{
+        padding-top:10px !important;
+    }
+    .card-btn > a:hover{
+        color:aliceblue !important;
+    }
+    .breadcrumbs {
+        font-size: 16px;
+        background-color: #f5f5f5;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+        .breadcrumbs ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .breadcrumbs li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+            .breadcrumbs li:last-child {
+                font-weight: bold; 
+            }
+
+        .breadcrumbs a {
+            text-decoration: none;
+            color: #333; 
+        }
+
+            .breadcrumbs a:hover {
+                text-decoration: underline;
+            }
+
+        .breadcrumbs i {
+            margin: 0 5px;
+        }
+
+        .slide_product{
+            opacity:0.5;
+            margin-bottom:10px;
+            border: 2px solid black;
+        }
+        .slide_product:hover{
+            opacity:1;
+        }
+        .active{
+            opacity:1;
+        }
+</style>
+
+
+<div class="row" style="margin-top:130px;">
+    <div class="col">
+        <div class="breadcrumbs d-flex flex-row align-items-center">
+            <ul style="text-decoration:none; display:inline-block;">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>@category.Name</a></li>
+                <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>@Model.Name</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<section class="product1" style="margin-top:20px !important">
+    <div class="product2">
+        <div class="product3">
+            <div class="product-hinhanh" style="display:flex">
+                <div class="hinhanhtrai" style="padding-left:300px">
+                    <img src="~/image/@Model.Image" class="slide_product active" style="width: 150px; height: 200px; display: block; cursor: pointer;" onclick="currentSlide(1)">
+                    <img src="~/image/@productImages.Img_1" class="slide_product" style="width: 150px; height: 200px; display: block; cursor: pointer;" onclick="currentSlide(2)">
+                    <img src="~/image/@productImages.Img_2" class="slide_product" style="width: 150px; height: 200px; display: block; cursor: pointer;" onclick="currentSlide(3)">
+                </div>
+                <div class="hinhanhphai">
+                    <img src="~/image/@Model.Image" id=featured >
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="product4">
+            <diV class="product4_1">
+                <div class="product4_1_1">
+                    <span>@Model.Name</span>
+                    <br />
+                    <p>Mã SP. @Model.Code</p>
+                </div>
+                <div class="product4_1_2">
+                    @if (Model.PromotionPrice == null)
+                    {
+                        <span><del></del></span>
+                        <span>Giá @Model.Pice VNĐ</span>
+                    }
+                    else
+                    {
+                        <span><del>Giá @Model.Pice</del>VNĐ</span>
+                        <span>@Model.PromotionPrice VNĐ</span>
+                    }
+                </div>
+                <div class="caption-container">
+                    <p id="caption">Màu sắc</p>
+                </div>
+                <div class="thanhmau">
+                    <div class="mau">
+                        <input class="mau-product" id="xamdam" type="button" alt="xámđậm">
+                    </div>
+                    <div class="mau">
+                        <input class="mau-product" id="do" type="button" alt="Đỏ">
+                    </div>
+                    <div class="mau">
+                        <input class="mau-product" id="xam" type="button" alt="xám">
+                    </div>
+                    <div class="mau">
+                        <input class="mau-product" id="xanhdam" type="button" alt="Xanh Đậm">
+                    </div>
+                    <div class="mau">
+                        <input class="mau-product" id="xanh" type="button" alt="Xanh">
+                    </div>
+                </div>
+                <div class="caption-container">
+                    <p id="caption">Size</p>
+                </div>
+                <div class="product4_1_3">
+                    <div><span>X</span></div>
+                    <div><span>M</span></div>
+                    <div><span>L</span></div>
+                    <div><span>XL</span></div>
+                </div>
+                <div class="product4_1_4">
+                    <input type="button" id="add-sanpham" value="Thêm vào giỏ hàng">
+                </div>
+                <div class="product4_1_5"><span>Thông tin sản phẩm</span></div>
+                <div class="product4_1_6">
+                    <div class="chitiet-product">
+                        <button class="accordion">Chi tiết</button>
+                        <div class="panel">
+                            <p>Mã SP. @Model.Code</p>
+
+                            <p>Một trong những item không thể thiếu trong những ngày giao mùa chính là sweatset đa năng, thích hợp mặc đi cafe cùng bạn bè, hoạt động thể thao hay đơn giản chỉ là thư giãn ở nhà. The Cosmo xin được gửi tới bạn ấn phẩm đặc biệt Skyler Sweatset gồm 4 màu cơ bản: trắng, đen, xám & xanh navy. </p>
+
+                            <P>Sweatset gồm một áo thun sweatshirt và một sweatpants đồng bộ. Áo thun tay dài, cổ tròn, có bo thun tại cổ và tay áo. Chất liệu thun da cá 100% cotton, mềm mịn, có độ dày vừa phải, đem lại cảm giác thoải mái khi sử dụng.</P>
+                        </div>
+
+                        <button class="accordion">Chất liệu</button>
+                        <div class="panel">
+                            <p>100% Cotton</p>
+                        </div>
+
+                        <button class="accordion">Hướng dẫn sử dụng</button>
+                        <div class="panel">
+                            <p>Ủi nhẹ ở nhiệt độ tối đa 110°C</p>
+                            <p>Giặt máy bằng nước lạnh</p>
+                            <p>Nên giặt chung với các sản phẩm có cùng tông màu</p>
+                            <p>Không sử dụng chất tẩy mạnh</p>
+                        </div>
+                        <button class="accordion">Đổi Trả</button>
+                        <div class="panel">
+                            <p>Nếu quý khách chưa hoàn toàn hài lòng với sự lựa chọn của mình, THE COSMO luôn luôn hỗ trợ dịch vụ đổi/ trả sản phẩm theo quy định sau đây:</p>
+                            <p>- Khách hàng được phép đổi/ trả sản phẩm trong vòng 30 ngày kể từ ngày nhận được sản phẩm (theo dấu bưu điện). Khách hàng có thể mang sản phẩm trực tiếp tới cửa hàng hoặc gửi qua đường bưu điện. </p>
+                            <p>- Sản phẩm phải còn nguyên tem mạc, mã sản phẩm, nhãn mác và túi đựng của THE COSMO.</p>
+                            <p>- Sản phẩm không bị dơ bẩn, hư hỏng, trầy xước, không có mùi lạ, chưa qua sử dụng và chưa được giặt, tẩy.</p>
+                            <p>- Quý khách vui lòng đóng gói sản phẩm cần hoàn trả kèm đầy đủ tem mác, túi đựng, hoá đơn và mang sản phẩm trực tiếp tới cửa hàng, hoặc gửi kiện hàng đã đóng gói cho chúng tôi. </p>
+                            <p>- THE COSMO sẽ xử lý đơn hàng và gửi sản phẩm khác tới quý khách hàng trong vòng 7 ngày từ khi THE COSMO nhận được sản phẩm hoàn lại. </p>
+                            <p>- Trong trường hợp sản phẩm quý khách yêu cầu đổi hết hàng, quý khách có thể chọn sản phẩm khác.  </p>
+                            <p>- Để được hỗ trợ thêm về việc đổi trả sản phẩm, vui lòng liên hệ bộ phận Chăm sóc Khách hàng qua Hotline 1900 54 54 57 hoặc email contact@thecosmo.vn</p>
+                        </div>
+                    </div>
+                </div>
+            </diV>
+        </div>
+        <div class="product5">
+            <h1>Gợi ý dành cho bạn</h1>
+            <div class="product-container">
+                @foreach (var item in relatedProducts)
+                {
+                    var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                    <div class="product-card">
+                        <div class="product-image">
+
+                            <a href="@url"><img src="~/image/@item.Image" class="product-thumb" alt="@item.Name"></a>
+                            <button class="card-btn"><a href="@url" style="color:#000000; text-decoration: none">Thêm vào giỏ hàng</a></button>
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-brand">@item.Name</h2>
+                            <br />
+                            @if (item.PromotionPrice == null)
+                            {
+                                <span class="price">@item.Pice VNĐ</span>
+                            }
+                            else
+                            {
+                                <span class="price">@item.PromotionPrice VNĐ</span><span class="actual-price">@item.Pice VNĐ</span>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    let slide_products = document.getElementsByClassName('slide_product')
+
+    let activeImages = document.getElementsByClassName('active')
+
+    for (var i = 0; i < slide_products.length; i++) {
+        slide_products[i].addEventListener('mouseover', function () {
+            console.log(activeImages)
+
+            if (activeImages.length > 0) {
+                activeImages[0].classList.remove('active')
+            }
+
+            this.classList.add('active')
+            document.getElementById('featured').src = this.src
+        })
+    }
+
+</script>
+
+<script src="~/js/chatbot.js"></script>
+<script src="~/js/scroll bar.js" language="javascript"></script>
+<script src="~/js/nav.js" type="text/javascript" language="javascript"></script>
+
+
+

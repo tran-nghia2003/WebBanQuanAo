@@ -1,0 +1,57 @@
+.sigup{
+	padding-top: 50px;
+	padding-bottom: 150px;
+	margin-top: 0px;
+	background: #f5f5f5;
+	padding-left: 700px;
+}
+.sigup1{
+	width: 500px;
+	
+}
+.sigup-title{
+	padding-left: 180px;
+	margin-top: 160px;
+	background-color: #f5f5f5; 
+	text-align: left;
+}
+.sigup1 input[type="text"],.sigup1 input[type="password"],.sigup1 input[type="email"],
+textarea{
+    display: block;
+    width: 500px;
+    height: 40px;
+    padding: 20px;
+    border-radius: 5px;
+    background: #fff;
+    border: none;
+    outline: none;
+    margin: 20px 0;
+    text-transform: capitalize;
+    color: #383838;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.01);
+    font-family: 'roboto', sans-serif;
+}
+
+label{
+    text-transform: capitalize;
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #383838;
+}
+
+label a{
+    color: #383838;
+}
+.sigup3{
+	color: #383838;
+}
+.submit-sigup{
+	cursor: pointer;
+	background-color: #131313;
+	color: #FFFFFF;
+	width: 500px;
+	height: 40px;
+	margin-bottom: 20px;
+}

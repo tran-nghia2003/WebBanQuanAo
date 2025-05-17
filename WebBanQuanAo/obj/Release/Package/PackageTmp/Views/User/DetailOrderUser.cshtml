@@ -1,0 +1,231 @@
+﻿@model List<Models.ViewModel.OrderDetailViewModel>
+@{
+    ViewBag.Title = "DetailOrderUser";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div id="project" class="project" style="margin-top:150px">
+    <div class="row" style="min-height: 170px; display:flex">
+        <div class="col-md-6" style="width:50%">
+            @*<div style="margin-left: 40px;">
+                <p style="color: black; font-size: 20px">Trang chủ / Tài khoản</p><br />
+                <a href="@Url.Action("Index", "Home")" class="add_posts">
+                    <h4 style="color: black"><img height="24" width="24" src="~/Content/images/back.png" /> Quay lại</h4>
+                </a>
+                </div>*@
+            <div class="row set_button" style="margin-left: 30px; padding: 10px; width: 210px; background-color: white">
+                <button class="text-uppercase" id="btn1" onclick="btn1()" style="color: rgb(0,178,228); border:none; font-weight: bold;text-transform:uppercase; display: block; background: none">
+                    Hoạt động gần đây &nbsp;
+                    <img height="16" width="16" src="~/Content/images/down-chevron.png" />
+                </button>
+                <button class="text-uppercase" id="btn2" onclick="btn2()" style="color: rgb(0,178,228); border: none; font-weight: bold; text-transform: uppercase; display: none; background: none ">
+                    Hoạt động gần đây &nbsp;
+                    <img height="16" width="16" src="~/Content/images/up-chevron.png" />
+                </button>
+            </div>
+            <div id="content" style="display: none; background-color: white; height: 120px; width: 210px; margin-left: 30px; border: solid 1px white">
+                <p class="set_hover" style="margin-top: 5px; padding: 5px; padding-left: 15px;">
+                    <a href="@Url.Action("PostsOfUser","Posts")" style="color: rgb(0,178,228)">
+                        Bài viết gần đây
+                    </a>
+                </p>
+                <p class="set_hover" style="margin-top: 5px; padding: 5px; padding-left: 15px;">
+                    <a href="@Url.Action("DetailOrderUser","User")" style="color: rgb(0,178,228) ">
+                        Danh sách đơn hàng
+                    </a>
+                </p>
+                <p class="set_hover" style="margin-top: 5px; padding: 5px; padding-left: 15px">
+                    <a href="@Url.Action("HistoryOrder","User")" style="color: rgb(0,178,228) ">
+                        Lịch sử mua hàng
+                    </a>
+                </p>
+
+            </div>
+        </div>
+        <div class="col-md-6" style="text-align: right; width:50%">
+            <div style="margin-right: 40px;">
+                <a href="@Url.Action("Logout", "User")" class="add_posts">
+                    <h2 class="" style="color: red; font-weight: bold">Đăng xuất <img height="32" width="32" src="~/Content/images/logout.png" /></h2>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container" style="margin-left:104px; margin-right:104px; padding-left:15px; padding-right:15px">
+        <div class="card" style="background: rgba(0,0,0,0.5); min-height: 200px;">
+            <div class="card-header" style="background: rgba(0,0,0,0.5); height: 67px ; z-index: 1">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 style="color: white; margin-left: 30px">Chi tiết đơn hàng</h1>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-body" style="text-align: center; z-index: 1">
+
+
+
+                <script language="javascript">
+                    function btn1() {
+                        document.getElementById("content").style.display = 'block';
+                        document.getElementById("btn1").style.display = 'none';
+                        document.getElementById("btn2").style.display = 'block';
+                    }
+                    function btn2() {
+                        document.getElementById("content").style.display = 'none';
+                        document.getElementById("btn2").style.display = 'none';
+                        document.getElementById("btn1").style.display = 'block';
+                    }
+                </script>
+
+                <br />
+                <br />
+                @if (Model.Any())
+                {
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+
+                                <th>Tên sản phẩm</th>
+                                <th>Hình ảnh</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.NameProduct</td>
+                                    <td><img src="~/image/@item.Image" style="max-width:100px;max-height:100px"/></td>
+                                    <td>@item.Price</td>
+                                    <td>@item.Quantity</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span>Không có sản phầm nào!</span>
+                }
+
+
+            </div>
+            <div class="card-footer" style="text-align: right; height: 60px; margin-top:20px">
+                <a class="btn-success" href="@Url.Action("HistoryOrder","User")">Quay lại</a>
+            </div>
+        </div>
+    </div><br /><br /><br /><br /><br /><br /><br />
+</div>
+
+
+
+
+<style>
+    a {
+        text-decoration: none
+    }
+
+    .set_button:hover {
+        background-color: white;
+        border: solid 1px rgb(0,178,228);
+    }
+
+    .set_hover:hover {
+        background-color: none;
+        border: solid 1px rgb(0,178,228);
+        font-size: 17px;
+    }
+
+    .project {
+        padding-bottom: 0px;
+        padding-top: 30px;
+        background-image: url('../../Content/images/backgoundUser.jpg');
+        min-height: 100vh;
+    }
+
+    .btn_a {
+        color: white;
+        padding: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color: rgba(0,0,0,0.5);
+        border-radius: 8px;
+        margin-right: 20px
+    }
+
+        .btn_a:hover {
+            background: white;
+            color: dodgerblue;
+        }
+
+    .css_card-body {
+        color: white;
+    }
+
+    .card-footer {
+        height: 50px;
+    }
+
+        .card-footer input {
+            color: white;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-right: 30px;
+            margin-right: 30px;
+        }
+
+        .card-footer img:hover {
+            height: 32px;
+            width: 32px;
+        }
+
+    add_posts:hover {
+        background-color: forestgreen;
+        color: white;
+    }
+
+    img {
+        max-height: 440px;
+        max-width: 540px;
+    }
+
+    .copyright {
+        margin-top: 0;
+    }
+
+    .table-bordered th {
+        text-align: center;
+        width: 150px;
+        height: 70px;
+    }
+
+    .table-bordered tr {
+        text-align: center;
+        width: 150px;
+        height: 70px;
+    }
+
+    .btn-success {
+        width: 100px;
+        margin-top: 14px;
+        padding: 5px 10px;
+        margin-right: 30px;
+        background-color: white;
+        color: black;
+        text-decoration: none; /* Remove default link underline */
+        border-radius: 5px;
+        border: 1px solid #28a745; /* Green border for success button */
+    }
+
+        .btn-success:hover {
+            background-color: #28a745;
+            color: white;
+        }
+</style>
+
+

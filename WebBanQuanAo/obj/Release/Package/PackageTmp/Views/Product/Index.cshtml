@@ -1,0 +1,110 @@
+﻿@using PagedList;
+
+@model IPagedList<Models.EF.Product>
+
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var listProductAlls = (List<Models.EF.Product>)ViewBag.ListProductAlls;
+}
+
+
+<title>Trang sản phẩm</title>
+<link href="~/css/women.css" rel="stylesheet" />
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+<style>
+</style>
+
+<div class="main">
+    <div class="main1">
+        <h3 style="padding-top:20px">Danh mục sản phẩm</h3>
+        @{Html.RenderAction("ProductCategory", "Product");}
+    </div>
+    <div class="sapxep">
+        <div class="sapxep1">
+            <select class="sapxep1_2">
+                <option>Sắp xếp</option>
+                <option>Giá: Tăng dần</option>
+                <option>Giá: Giảm dần</option>
+                <option>Tên: A-Z</option>
+                <option>Tên: Z-A</option>
+                <option>Mới nhất</option>
+                <option>Cũ nhất</option>
+                <option>Bán chạy nhất</option>
+            </select>
+        </div>
+    </div>
+    <h3 style="margin-left:300px; margin-bottom:30px">Sản phẩm >> Tất cả sản phẩm</h3>
+    <div class="main2">
+
+        <div class="product-container">
+            @if (Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                    <div class="product-card">
+                        <div class="product-image">
+
+                            <a href="@url"><img src="~/image/@item.Image" class="product-thumb" alt="@item.Name"></a>
+                            <button class="card-btn"><a href="/gio-hang/@item.ID" style="color:#000000; text-decoration: none; text-align:center">Thêm vào giỏ hàng</a></button>
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-brand">@item.Name</h4>
+                            <br />
+                            @if (item.PromotionPrice == null)
+                            {
+                                <span class="price">@item.Pice VNĐ</span>
+                            }
+                            else
+                            {
+                                <span class="price">@item.PromotionPrice VNĐ</span><span class="actual-price">@item.Pice VNĐ</span>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="product-card">
+                    <h3>Không có bản ghi nào!</h3>
+                </div>
+            }
+
+
+        </div>
+        @if (Model.Any())
+        {
+            <div style="text-align:center; clear:both">
+                <span class="page-info" style="clear:both;">Trang @Model.PageNumber/@Model.PageCount</span>
+            </div>
+        }
+        <div class="pagination">
+
+            @if (Model.HasPreviousPage)
+            {
+                <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })">Trước</a>
+            }
+
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                if (Model.PageNumber == i)
+                {
+
+                }
+                else
+                {
+                    <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                }
+            }
+
+            @if (Model.HasNextPage)
+            {
+                <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1 })">Sau</a>
+            }
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/scroll bar.js"></script>

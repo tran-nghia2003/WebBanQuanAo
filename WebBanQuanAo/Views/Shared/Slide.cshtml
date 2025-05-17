@@ -1,0 +1,8 @@
+﻿@model List<Models.EF.Slide>
+
+@foreach (var item in Model)
+{
+    <div class="mySlides fade"> 
+        <img src="~/image/@item.Image" style="width:100%">     
+    </div>
+}

@@ -1,0 +1,86 @@
+﻿
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+
+<link rel="icon" type="image/x-icon" href="~/image/light-logo.png">
+<link href="~/css/nav.css" rel="stylesheet" />
+<link href="~/css/footer.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/~/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/css/chatbot.css" />
+
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav">
+            <a href="index.html"><img src="~/image/Fashion_TV_logo.png" class="brand-logo" alt=""></a>
+            <div class="nav-items">
+                <form class="search" action="/tim-kiem" method="get">
+
+                    <input type="text" class="search-box" id="txtKeyword" name="keyword" placeholder="Gõ từ khóa">
+                    <button class="search-btn">Tìm kiếm</button>
+
+                </form>
+                @{
+                    var session = (UserLogin)Session[WebBanQuanAo.Common.CommonConstants.USER_SESSION];
+                }
+
+                @if (session == null)
+                {
+                    <a href="/dang-nhap"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a>
+                    <a href="/dang-ky"><i class="fa fa-users" aria-hidden="true"></i>Đăng kí</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("DetailUser","User", new { UserName = session.UserName })"><i class="fa fa-users" aria-hidden="true"></i>Xin chào:@session.UserName</a>
+                    <span>@Html.ActionLink("Đăng xuất", "Logout", "User")</span>
+                }
+
+
+                @{ Html.RenderAction("HeaderCart", "Home");}
+            </div>
+        </div>
+        <div class="wrapper">
+            @{Html.RenderAction("MainMenu", "Home");}
+        </div>
+    </nav>
+
+    @RenderBody()
+
+    <script src="/js/baseController.js"></script>
+
+    <footer class="footer-main" style="bottom:0px">
+        @{Html.RenderAction("Footer", "Home");}
+    </footer>
+
+    <button class="nut-mo-chatbox" onclick="moForm()">Chat</button>
+    <div class="Chatbox" id="myForm">
+        <form action="" class="form-container">
+            <h1>Clothing</h1>
+            <label for="msg"><b>Lời Nhắn</b></label>
+            <textarea placeholder="Bạn hãy nhập lời nhắn.." name="msg" required></textarea>
+            <button type="submit" class="btn">Gửi</button>
+            <button type="button" class="btn nut-dong-chatbox" onclick="dongForm()">Đóng</button>
+        </form>
+    </div>
+
+
+    <script type="text/javascript" src="~/js/footer.js"></script>
+    <script src="~/js/chatbot.js"></script>
+    <script src="~/js/slideshow.js"></script>
+    <script src="js/scroll bar.js" language="javascript"></script>
+    <script src="~/js/product_slideshow.js" language="javascript"></script>
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>

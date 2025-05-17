@@ -1,0 +1,213 @@
+﻿@model List<WebBanQuanAo.Models.CartItem>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+
+
+    var User = (Models.EF.User)ViewBag.User;
+
+
+
+}
+
+<title>Trang thanh toán</title>
+
+<link href="~/css/ShopCart.css" rel="stylesheet" />
+
+
+
+<style>
+    div.form-group {
+        margin-top: 10px;
+    }
+
+    input.form-control {
+        background-color: #F2F2F2;
+        color: #333;
+    }
+
+        /* Thay đổi kích thước của các input fields */
+        input.form-control.wide-input {
+            width: 750px; /* Sử dụng 100% để động theo kích thước của parent container */
+            height: 40px;
+            font-size: 16px;
+        }
+
+    /* Thay đổi màu chữ và font của label */
+    label.control-label {
+        font-size: 20px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    /* Điều chỉnh đường viền và góc bo tròn của button */
+    button.btn.btn-success {
+        background-color: #FF5733;
+        color: #FFFFFF;
+        width: 130px;
+        height: 40px;
+        border-radius: 5px;
+        border: none; /* Loại bỏ đường viền */
+    }
+
+    /* Tùy chỉnh màu nền của select box */
+    select.form-control {
+        font-size: 16px;
+        width: 300px;
+        height: 40px;
+        background-color: #F2F2F2;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function OnBeginCO() {
+        $('#btnCheckOut').attr("disabled", "disabled");
+        $('#load_send').html('<h2>Đang gửi...</h2>');
+    }
+
+    $(document).ready(function () {
+        // Bắt đầu theo dõi sự kiện thay đổi trên dropdown
+        $("#drTypePayment").change(function () {
+            var selectedValue = $(this).val(); // Lấy giá trị được chọn
+
+            // Nếu giá trị được chọn là "2" (Chuyển khoản), hiện phần tử #load_form_payment, ngược lại ẩn nó
+            if (selectedValue === "2") {
+                $("#btn-CheckOut").show();
+            } else {
+                $("#btn-CheckOut").hide();
+            }
+        });
+    });
+</script>
+
+
+<div class="container-cart">
+    <h1>Giỏ hàng</h1>
+    <div class="cart">
+
+        <div class="products">
+            <div class="payment-form">
+                <h2>Thông tin thanh toán</h2>
+
+                @using (Html.BeginForm("Payment", "Cart", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.ValidationSummary()
+
+                    <div class="form-group">
+                        <label for="shipName" class="col-sm-2 control-label">Người nhận</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="shipName" name="shipName" class="form-control wide-input" value="@User.Name" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile" class="col-sm-2 control-label">Số điện thoại</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="mobile" name="mobile" class="form-control wide-input" value="@User.Phone" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="email" name="email" class="form-control wide-input" value="@User.Email" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address" class="col-sm-2 control-label">Địa chỉ</label>
+                        <div class="col-sm-10">
+                            <input type="text" a id="address" name="address" class="form-control wide-input" value="@User.Address" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hình thức thanh toán</label>
+                        <select class="form-control" name="Payment" id="drTypePayment">
+                            <option name="TypePaymentVN" value="1" selected>COD</option>
+                            <option name="TypePaymentVN" value="2">Chuyển khoản</option>
+                        </select>
+                    </div>
+
+
+                    @*<div class="form-group" id="load_form_payment" style="display:none">
+                            <h4><label>Chọn phương thức thanh toán</label></h4>
+                            <h5>Cách 1: Chuyển hướng sang VNPAY chọn phương thức thanh toán</h5>
+                            <label><input type="radio" name="TypePaymentVN" value="0" checked />Cổng thanh toán VNPAYQR</label>
+                            <h5>Cách 2: Tách phương thức thanh toán tại site của Merchant</h5>
+                            <label><input type="radio" name="TypePaymentVN" value="1" />Thanh toán qua ứng dụng hỗ trợ VNPAYQR</label>
+                            <label><input type="radio" name="TypePaymentVN" value="2" />ATM-Tài khoản ngân hàng nội địa</label>
+                            <label><input type="radio" name="TypePaymentVN" value="3" />Thanh toán qua thẻ quốc tế</label>
+                        </div>
+                        <div class="form-group" id="load_send"></div>*@
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success" id="btnCheckOut" style="background-color: #d9534f; color:aliceblue; width:130px ; height:40px; border-radius:5px;">Đặt hàng</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="load_send"></div>
+                    <div class="form-group" id="btn-CheckOut" style="display:none">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <a href="~/Cart/PaymentWithPayPal" class="btn btn-success" id="btnCheckOut" style="background-color: #0094ff; color:aliceblue; width:130px ; height:40px; border-radius:5px; text-decoration:none;text-align:center; font-size:14px; padding:4px;">
+                                Thanh toán bằng Paypal
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+        <div class="cart-total">
+            <h3 style="text-align:center;color:#d80f0f">Giỏ hàng</h3>
+            @foreach (var item in Model)
+            {
+
+
+
+                <p>
+                    <span>@item.Product.Name</span>
+                    <span>@item.Quantity</span>
+                </p>
+
+
+            }
+
+            <p>
+                <span>Tổng tiền</span>
+                <span>@(string.Format("{0:N0} VNĐ", Model.Sum(x=>x.TotalPrice)))</span>
+            </p>
+            <p>
+                <span>Số mặt hàng</span>
+                <span>@Model.Sum(m => m.Quantity) </span>
+            </p>
+            <a href="@Url.Action("Index", "Home")">Tiếp tục mua hàng</a>
+
+        </div>
+    </div>
+
+
+
+
+</div>
+<div class="cart2">
+    <div>
+        <img src="~/image/cart1.jpg">
+        <p><b>MIỄN PHÍ VẬN CHUYỂN</b></p>
+        <p>Cho đơn hàng nguyên giá từ 500k</p>
+    </div>
+    <div>
+        <img src="~/image/cart2.jpg">
+        <p><b>90 NGÀY ĐỔI TRẢ</b></p>
+        <p>Đổi trả sản phẩm trong 90 ngày</p>
+    </div>
+    <div>
+        <img src="~/image/cart3.jpg">
+        <p><b>HOTLINE 24/7</b></p>
+        <p>Hotline 1900 54 54 57</p>
+    </div>
+</div>
+

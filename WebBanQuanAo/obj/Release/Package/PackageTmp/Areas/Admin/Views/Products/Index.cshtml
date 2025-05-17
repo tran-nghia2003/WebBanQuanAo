@@ -1,0 +1,183 @@
+﻿@model IEnumerable<Models.EF.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .description {
+        max-width: 300px; /* Điều chỉnh kích thước tối đa của mô tả */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Hiển thị dấu ba chấm (...) khi văn bản bị cắt bớt */
+    }
+
+    .thumbnail-image {
+        max-width: 100px; /* Điều chỉnh kích thước tối đa của hình ảnh */
+        max-height: 100px;
+    }
+</style>
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="~/Admin/HomeAdmin/Index" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="~/Admin/products/Index" class="nav-link">Sản phẩm</a>
+        </li>
+    </ul>
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Danh sách sản phẩm</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Tài khoản</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh sách tài khoản</h3>
+            <div class="card-tools">
+
+                @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-warning" })
+
+            </div>
+        </div>
+
+
+
+        <div class="card-body">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MetaTitle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Image)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PromotionPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IncludedVAT)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Detail)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Warranty)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreateDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TopHot)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ViewCount)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MetaTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            <img src="~/image/@item.Image" class="thumbnail-image" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PromotionPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IncludedVAT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Detail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Warranty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TopHot)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ViewCount)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Cập nhật", "Edit", new { id = item.ID }, new { @class = "btn btn-primary" }) |
+                            @Html.ActionLink("Xem", "Details", new { id = item.ID }, new { @class = "btn btn-info" }) |
+                            @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+
+        </div>
+
+    </div>
+</section>
+
+
+

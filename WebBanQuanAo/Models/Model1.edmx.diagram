@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ba8cffc55b7245f095d087338c99ec29" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="WebsiteBanHangModel.ChiTietDonHang" Width="1.5" PointX="6.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanHangModel.ChiTietGioHang" Width="1.5" PointX="4" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanHangModel.DanhMucSanPham" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanHangModel.DiaChiGiaoHang" Width="1.5" PointX="3.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanHangModel.DonHang" Width="1.5" PointX="11.375" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanHangModel.GioHang" Width="1.5" PointX="6.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanHangModel.KhachHang" Width="1.5" PointX="0.625" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanHangModel.Menu" Width="1.5" PointX="6.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanHangModel.NhanHieuSanPham" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanHangModel.SanPham" Width="1.5" PointX="4" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanHangModel.TaiKhoanNguoiDung" Width="1.5" PointX="8.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanHangModel.TaiKhoanQuanTriVien" Width="1.5" PointX="11" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanHangModel.ThanhToan" Width="1.5" PointX="9.25" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="WebsiteBanHangModel.FK__ChiTietDo__MaDon__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanHangModel.FK__ChiTietDo__MaSan__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanHangModel.FK__ChiTietGi__MaGio__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanHangModel.FK__ChiTietGi__MaSan__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanHangModel.FK__SanPham__MaDanhM__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanHangModel.FK__DiaChiGia__MaKha__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanHangModel.FK__DonHang__MaKhach__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanHangModel.FK__ThanhToan__MaDon__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanHangModel.FK__GioHang__MaKhach__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanHangModel.FK__SanPham__MaNhanH__46E78A0C" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WebsiteBanHangModel.Tintuc" Width="1.5" PointX="0.75" PointY="9.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

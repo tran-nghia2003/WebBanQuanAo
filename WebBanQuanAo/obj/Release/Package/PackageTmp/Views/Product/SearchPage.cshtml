@@ -1,0 +1,96 @@
+﻿@using PagedList;
+
+@model IPagedList<Models.EF.Product>
+
+
+@{
+    ViewBag.Title = "SearchPage";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var KeyWord = ViewBag.keyword;
+
+
+}
+
+<title>Trang tìm kiếm</title>
+<link href="~/css/women.css" rel="stylesheet" />
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+
+<div class="main">
+    @if (Model.Any())
+    {
+        <h3 style="margin-left:300px; margin-bottom:30px">kẾT QUẢ TÌM KIẾM THEO TỪ KHÓA: @KeyWord</h3>
+    }
+    else
+    {
+        <h3 style="margin-left:300px; margin-bottom:260px">KHÔNG CÓ SẢN PHẨM NÀO PHÙ HỢP VỚI TỪ KHÓA: @KeyWord</h3>
+    }
+
+    <div class="main2" style="display:block">
+
+        <div class="product-container">
+            @if (Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                    <div class="product-card">
+                        <div class="product-image">
+
+                            <a href="@url"><img src="~/image/@item.Image" class="product-thumb" alt="@item.Name"></a>
+                            <a href="/them-gio-hang?productId=@item.ID&quantity=1" style=" text-decoration: none" class="card-btn">Thêm vào giỏ hàng</a>
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-brand">@item.Name</h4>
+                            <br />
+                            @if (item.PromotionPrice == null)
+                            {
+                                <span class="price">@item.Pice VNĐ</span>
+                            }
+                            else
+                            {
+                                <span class="price">@item.PromotionPrice VNĐ</span><span class="actual-price">@item.Pice VNĐ</span>
+                            }
+                        </div>
+                    </div>
+                }
+
+
+            }
+
+        </div>
+        @if (Model.Any())
+        {
+            <div style="text-align:center">
+                <span class="page-info" style="clear:both;">Trang @Model.PageNumber/@Model.PageCount</span>
+            </div>
+        }
+        <div style="text-align:center">
+            <div class="pagination" style="text-align:center">
+
+                @if (Model.HasPreviousPage)
+                {
+                    <a class="page-link" href="@Url.Action("SearchPage", new { KeyWord, page = Model.PageNumber - 1 })">Trước</a>
+                }
+
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    if (Model.PageNumber == i)
+                    {
+                        <a class="page-link current-page" href="@Url.Action("SearchPage", new { KeyWord, page = i })">@i</a>
+                    }
+                    else
+                    {
+                        <a class="page-link" href="@Url.Action("SearchPage", new { KeyWord, page = i })">@i</a>
+                    }
+                }
+
+                @if (Model.HasNextPage)
+                {
+                    <a class="page-link" href="@Url.Action("SearchPage", new { KeyWord, page = Model.PageNumber + 1 })">Sau</a>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
